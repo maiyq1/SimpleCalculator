@@ -8,9 +8,13 @@ import androidx.activity.compose.setContent
 import androidx.annotation.ColorRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -36,6 +40,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -76,7 +81,8 @@ fun principal() {
             painter = painterResource(id = R.drawable.logo_calculadora),
             contentDescription = null,
             modifier = Modifier
-                .height(150.dp))
+                .height(200.dp)
+                .padding(top = 10.dp, bottom = 10.dp))
 
         OutlinedTextField(
             value = num1,
@@ -106,59 +112,56 @@ fun principal() {
             }
         )
 
-        Row {
+        Row (modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 25.dp),
+            horizontalArrangement = Arrangement.SpaceBetween) {
+            Button(
+                colors = ButtonDefaults.buttonColors(Color(175,38,29)),
+                modifier = Modifier.padding(15.dp),
+                onClick = {
+                    val valNum1 = num1.toFloat()
+                    val valNum2 = num2.toFloat()
+                    result = (valNum1 + valNum2).toString()
+                }) {
+                Text(text = "+")
+            }
 
-        }
+            Button(
+                colors = ButtonDefaults.buttonColors(Color(175,38,29)),
+                modifier = Modifier.padding(15.dp),
+                onClick = {
+                    val valNum1 = num1.toFloat()
+                    val valNum2 = num2.toFloat()
+                    result = (valNum1 - valNum2).toString()
+                }) {
+                Text(text = "-")
+            }
 
-        Button(
-            colors = ButtonDefaults.buttonColors(Color(175,38,29)),
-            modifier = Modifier
-                .padding(20.dp),
-            onClick = {
-                val valNum1 = num1.toFloat()
-                val valNum2 = num2.toFloat()
-                result = (valNum1 + valNum2).toString()
-            }) {
-            Text(text = "+")
-        }
+            Button(
+                colors = ButtonDefaults.buttonColors(Color(175,38,29)),
+                modifier = Modifier.padding(15.dp),
+                onClick = {
+                    val valNum1 = num1.toFloat()
+                    val valNum2 = num2.toFloat()
+                    result = (valNum1 * valNum2).toString()
+                }) {
+                Text(text = "*")
+            }
 
-        Button(
-            colors = ButtonDefaults.buttonColors(Color(175,38,29)),
-            modifier = Modifier
-                .padding(20.dp),
-            onClick = {
-                val valNum1 = num1.toFloat()
-                val valNum2 = num2.toFloat()
-                result = (valNum1 - valNum2).toString()
-            }) {
-            Text(text = "-")
+            Button(
+                colors = ButtonDefaults.buttonColors(Color(175,38,29)),
+                modifier = Modifier.padding(15.dp),
+                onClick = {
+                    val valNum1 = num1.toFloat()
+                    val valNum2 = num2.toFloat()
+                    result = (valNum1 / valNum2).toString()
+                }) {
+                Text(text = "/")
+            }
         }
-
-        Button(
-            colors = ButtonDefaults.buttonColors(Color(175,38,29)),
-            modifier = Modifier
-                .padding(20.dp),
-            onClick = {
-                val valNum1 = num1.toFloat()
-                val valNum2 = num2.toFloat()
-                result = (valNum1 * valNum2).toString()
-            }) {
-            Text(text = "*")
-        }
-
-        Button(
-            colors = ButtonDefaults.buttonColors(Color(175,38,29)),
-            modifier = Modifier
-                .padding(20.dp),
-            onClick = {
-                val valNum1 = num1.toFloat()
-                val valNum2 = num2.toFloat()
-                result = (valNum1 / valNum2).toString()
-            }) {
-            Text(text = "/")
-        }
-        
-        Text(text = "Resultado: ${result}")
+        Text(text = "RESULTADO", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+        Text(text = "${result}", fontSize = 25.sp, fontWeight = FontWeight.Bold)
     }
 
 
